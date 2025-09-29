@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    int pid = fork();
+
+    if (pid == 0) {
+        // Child process
+        printf("Hello from Child! PID = %d\n", getpid());
+    } else if (pid > 0) {
+        // Parent process
+        printf("Hello from Parent! PID = %d, Child PID = %d\n", getpid(), pid);
+    } else {
+        // fork failed
+        printf("Fork failed!\n");
+    }
+
+    return 0;
+}
+
+output
+
+Hello from Parent! PID = 1234, Child PID = 1235
+Hello from Child! PID = 1235
