@@ -10,7 +10,6 @@ int main() {
         // Parent process
         printf("Hello from Parent! PID = %d, Child PID = %d\n", getpid(), pid);
     } else {
-        // fork failed
         printf("Fork failed!\n");
     }
 
