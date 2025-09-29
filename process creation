@@ -5,7 +5,6 @@ int main() {
     int pid = fork();
 
     if (pid == 0) {
-        // Child process
         printf("Hello from Child! PID = %d\n", getpid());
     } else if (pid > 0) {
         // Parent process
