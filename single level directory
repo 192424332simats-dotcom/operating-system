@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+struct File {
+    char name[20];
+    int startBlock;
+};
+
+int main() {
+    struct File files[5] = {
+        {"fileA", 5},
+        {"fileB", 12},
+        {"fileC", 20}
+    };
+    int n = 3, i;
+
+    printf("File Name\tStart Block\n");
+    for(i = 0; i < n; i++) {
+        printf("%s\t\t%d\n", files[i].name, files[i].startBlock);
+    }
+
+    return 0;
+}
+
+output
+
+File Name       Start Block
+fileA           5
+fileB           12
+fileC           20
+
