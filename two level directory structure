@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+struct File {
+    char name[20];
+    int startBlock;
+};
+
+struct User {
+    char name[20];
+    struct File files[5];
+    int fileCount;
+};
+
+int main() {
+    struct User users[2] = {
+        {"User1", {{"fileA", 5}, {"fileB", 12}}, 2},
+        {"User2", {{"fileX", 20}, {"fileY", 25}}, 2}
+    };
+    int i, j;
+
+    for(i = 0; i < 2; i++) {
+        printf("\n%s Directory:\n", users[i].name);
+        printf("File Name\tStart Block\n");
+        for(j = 0; j < users[i].fileCount; j++) {
+            printf("%s\t\t%d\n", users[i].files[j].name, users[i].files[j].startBlock);
+        }
+    }
+
+    return 0;
+}
+
+output
+
+User1 Directory:
+File Name       Start Block
+fileA           5
+fileB           12
+
+User2 Directory:
+File Name       Start Block
+fileX           20
+fileY           25
