@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <fcntl.h>      
+#include <unistd.h>     
+#include <stdlib.h>    
+
+int main() {
+    int fd;                    
+    char write_buf[] = "Hello, this is a UNIX system call demo!\n";
+    char read_buf[100];
+
+   
+    fd = open("demo.txt", O_CREAT | O_RDWR, 0644);  
+    
+
+    if (fd == -1) {
+        perror("Error creating/opening file");
+        exit(1);
+    }
+    printf("File created/opened successfully.\n");
+
+    
+    if (write(fd, write_buf, sizeof(write_buf)) == -1) {
+        perror("Error writing to file");
+        close(fd);
+        exit(1);
+    }
+    printf("Data written to file.\n");
+
+   
+    lseek(fd, 0, SEEK_SET);
+
+    
+    int bytes_read = read(fd, read_buf, sizeof(read_buf) - 1);
+    if (bytes_read == -1) {
+        perror("Error reading file");
+        close(fd);
+        exit(1);
+    }
+    read_buf[bytes_read] = '\0'; // Null terminate
+    printf("Data read from file:\n%s", read_buf);
+
+   
+    close(fd);
+    printf("File closed successfully.\n");
+
+    return 0;
+}
+
+Output 
+File opened successfully (fd = 3)
+Data written to file successfully.
+Data read from file:
+Hello, this is a demo of UNIX file system calls!
+File closed successfully.
+
