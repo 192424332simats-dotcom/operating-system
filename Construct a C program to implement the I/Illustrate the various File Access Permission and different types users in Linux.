@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <sys/stat.h>
+#include <stdlib.h>
+
+void print_permissions(mode_t mode) {
+    printf("Owner: ");
+    printf("%c%c%c  ", 
+    printf("Group: ");
+    printf("%c%c%c  ", 
+    
+    printf("Others: ");
+    printf("%c%c%c\n", 
+int main() {
+    char filename[100];
+    struct stat fileStat;
+
+    printf("Enter the filename: ");
+    scanf("%s", filename);
+
+    if (stat(filename, &fileStat) < 0) {
+        perror("stat");
+        exit(1);
+    }
+
+   
+    printf("\nFile: %s\n", filename);
+    printf("File type: ");
+    if (S_ISREG(fileStat.st_mode)) printf("Regular file\n");
+    else if (S_ISDIR(fileStat.st_mode)) printf("Directory\n");
+    else if (S_ISLNK(fileStat.st_mode)) printf("Symbolic link\n");
+    else printf("Other\n");
+
+    
+    print_permissions(fileStat.st_mode);
+
+    
+    printf("File size: %ld bytes\n", fileStat.st_size);
+
+    return 0;
+}
+
+Output
+
+Enter the filename: demo.txt
+
+File: demo.txt
+File type: Regular file
+Owner: rw-  Group: r--  Others: r--
+File size: 22 bytes
+
